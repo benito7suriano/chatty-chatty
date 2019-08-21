@@ -1,14 +1,14 @@
-const db = require('./server/db');
-const Author = require('./server/db/models/author');
-const Message = require('./server/db/models/message');
-const Channel = require('./server/db/models/channel');
+const db = require('./server/db')
+const Author = require('./server/db/models/author')
+const Message = require('./server/db/models/message')
+const Channel = require('./server/db/models/channel')
 
 const channels = [
   { name: 'really_random' },
   { name: 'generally_speaking' },
   { name: 'dogs_of_fullstack' },
   { name: 'lunch_planning' }
-];
+]
 
 const authors = [{
   name: 'Cody',
@@ -64,9 +64,9 @@ const authors = [{
 }, {
   name: 'Odie',
   image: '/images/odie.jpg'
-}];
+}]
 
-const id = () => Math.round(Math.random() * (authors.length - 1)) + 1;
+const id = () => Math.round(Math.random() * (authors.length - 1)) + 1
 
 const messages = [
   { authorId: id(), content: 'I like React!', channelId: 1 },
@@ -81,7 +81,7 @@ const messages = [
   { authorId: id(), content: 'I want to get tacos!', channelId: 4 },
   { authorId: id(), content: 'I want to get salad!', channelId: 4 },
   { authorId: id(), content: 'I want a taco salad!', channelId: 4 }
-];
+]
 
 const seed = () =>
   Promise.all(authors.map(author =>
@@ -95,23 +95,23 @@ const seed = () =>
   Promise.all(messages.map(message =>
     Message.create(message))
   )
-);
+)
 
 const main = () => {
-  console.log('Syncing db...');
+  console.log('Syncing db...')
   db.sync({ force: true })
     .then(() => {
-      console.log('Seeding databse...');
-      return seed();
+      console.log('Seeding databse...')
+      return seed()
     })
     .catch(err => {
-      console.log('Error while seeding');
-      console.log(err.stack);
+      console.log('Error while seeding')
+      console.log(err.stack)
     })
     .then(() => {
-      db.close();
-      return null;
-    });
-};
+      db.close()
+      return null
+    })
+}
 
-main();
+main()

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 export default class NewMessageEntry extends Component {
 
@@ -10,13 +10,13 @@ export default class NewMessageEntry extends Component {
             className="form-control"
             type="text"
             name="content"
-            placeholder="Say something nice..."
+            placeholder="Say something stupid..."
           />
           <span className="input-group-btn">
             <button className="btn btn-default" type="submit">Chat!</button>
           </span>
         </div>
       </form>
-    );
+    )
   }
 }
