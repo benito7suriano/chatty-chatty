@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import Message from './Message'
 import NewMessageEntry from './NewMessageEntry'
-import axios from 'axios'
+import { connect } from 'react-redux'
 import { fetchMessages } from '../store'
 
 const mapState = state => ({
@@ -15,18 +14,21 @@ const mapDispatch = (dispatch) => ({
 
 class MessagesList extends Component {
 
-  constructor (props) {
-    super(props)
-    this.state = this.props.state
+  constructor () {
+    super()
+    this.state = {messages: []}
   }
 
   componentDidMount () {
     this.props.fetchInitialMessages()
+    this.setState({
+      messages: this.props.messages
+    })
   }
 
   render () {
     const channelId = Number(this.props.match.params.channelId) // because it's a string "1", not a number!
-    const messages = this.state.messages
+    const messages = this.props.messages
     const filteredMessages = messages.filter(message => message.channelId === channelId)
 
     return (
@@ -40,6 +42,4 @@ class MessagesList extends Component {
   }
 }
 
-const ConnectedMessagesList = connect(mapState, mapDispatch)(MessagesList)
-
-export default ConnectedMessagesList
+export default connect(mapState, mapDispatch)(MessagesList)
