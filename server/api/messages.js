@@ -20,6 +20,9 @@ router.post('/', async (req, res, next) => {
   // Instead, we'll findOrCreate an author by name, for simplicity.
   // Of course, you wouldn't want to do this in a real chat app!
   try {
+
+    console.log('req.body', req.body)
+
     const [author] = await Author.findOrCreate({
       where: {
         name: req.body.name || 'Cody'

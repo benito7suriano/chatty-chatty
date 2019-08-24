@@ -3,7 +3,8 @@ import { writingMessage, postNewMessage } from '../store'
 import { connect } from 'react-redux'
 
 const mapState = state => ({
-  newMessageEntry: state.userInput
+  newMessageEntry: state.userInput,
+  name: state.nameEntry
 })
 
 const mapDispatch = dispatch => ({
@@ -24,9 +25,9 @@ class NewMessageEntry extends Component {
     const content = this.props.newMessageEntry
 
     // our channelId is available from the props sent by MessagesList, which it receives as props from the Route!
-    const channelId = this.props.channelId
+    const {name, channelId} = this.props
 
-    this.props.post({ content, channelId })
+    this.props.post({ content, name, channelId })
   }
 
   render () {

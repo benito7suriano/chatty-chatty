@@ -1,6 +1,6 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
-const Author = require('./author');
+const Sequelize = require('sequelize')
+const db = require('../db')
+const Author = require('./author')
 
 module.exports = db.define('message', {
   content: {
@@ -13,4 +13,4 @@ module.exports = db.define('message', {
       { model: Author }
     ]
   }
-});
+})
