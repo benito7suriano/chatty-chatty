@@ -7,18 +7,21 @@ import socket from './socket'
 // initial state
 const initialState = {
   messages: [],
-  userInput: ''
+  userInput: '',
+  nameEntry: ''
 }
 
 // action types
 const GOT_MESSAGES_FROM_SERVER = 'GOT_MESSAGES_FROM_SERVER'
 const WRITING_MESSAGE = 'WRITING_MESSAGE'
+const WRITING_USER = 'WRITING_USER'
 const RECEIVED_NEW_MESSAGE = 'RECEIVED_NEW_MESSAGE'
 // const GOT_CHANNELS_FROM_SERVER = 'GOT_CHANNELS_FROM_SERVER'
 
 // action creators
 export const gotMessagesFromServer = (messages) => ({type: GOT_MESSAGES_FROM_SERVER, messages})
-export const writingMessage = (input) => ({type: WRITING_MESSAGE, input})
+export const writingMessage = input => ({type: WRITING_MESSAGE, input})
+export const writingUser = input => ({type: WRITING_USER, input})
 export const receivedNewMessage = (message) => ({type: RECEIVED_NEW_MESSAGE, message})
 // export const gotChannelsFromServer = channels => ({type: GOT_CHANNELS_FROM_SERVER, channels})
 
@@ -48,9 +51,11 @@ export const postNewMessage = newMessage => async dispatch => {
 const reducer = (state=initialState, action) => {
   switch(action.type) {
     case GOT_MESSAGES_FROM_SERVER:
-      return {...state, messages: action.messages }
+      return {...state, messages: action.messages}
     case WRITING_MESSAGE:
       return {...state, userInput: action.input}
+    case WRITING_USER:
+      return {...state, nameEntry: action.input}
     case RECEIVED_NEW_MESSAGE:
       return {...state, messages: [...state.messages,action.message]}
     default:
