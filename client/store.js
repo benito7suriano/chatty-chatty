@@ -2,6 +2,7 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import axios from 'axios'
+import socket from './socket'
 
 // initial state
 const initialState = {
@@ -33,8 +34,8 @@ export const fetchMessages = () => async (dispatch) => {
 export const postNewMessage = newMessage => async dispatch => {
   const { data } = await axios.post('/api/messages',newMessage)
   const action = receivedNewMessage(data)
-
   dispatch(action)
+  socket.emit('new-message', data)
 }
 
 // export const fetchChannels = () => async dispatch => {
