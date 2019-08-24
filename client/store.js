@@ -30,6 +30,13 @@ export const fetchMessages = () => async (dispatch) => {
   dispatch(action)
 }
 
+export const postNewMessage = newMessage => async dispatch => {
+  const { data } = await axios.post('/api/messages',newMessage)
+  const action = receivedNewMessage(data)
+
+  dispatch(action)
+}
+
 // export const fetchChannels = () => async dispatch => {
 //   const { data } = await axios.get('/api/channels')
 //   const action = gotChannelsFromServer(data)

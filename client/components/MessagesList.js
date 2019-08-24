@@ -14,16 +14,8 @@ const mapDispatch = (dispatch) => ({
 
 class MessagesList extends Component {
 
-  constructor () {
-    super()
-    this.state = {messages: []}
-  }
-
   componentDidMount () {
     this.props.fetchInitialMessages()
-    this.setState({
-      messages: this.props.messages
-    })
   }
 
   render () {
@@ -36,7 +28,7 @@ class MessagesList extends Component {
         <ul className="media-list">
           { filteredMessages.map(message => <Message message={message} key={message.id} />) }
         </ul>
-        <NewMessageEntry />
+        <NewMessageEntry channelId={channelId} />
       </div>
     )
   }
