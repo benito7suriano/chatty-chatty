@@ -17,7 +17,8 @@ const RECEIVED_NEW_MESSAGE = 'RECEIVED_NEW_MESSAGE'
 
 // action creators
 export const gotMessagesFromServer = (messages) => ({type: GOT_MESSAGES_FROM_SERVER, messages})
-
+export const writingMessage = (input) => ({type: WRITING_MESSAGE, input})
+export const receivedNewMessage = (message) => ({type: RECEIVED_NEW_MESSAGE, message})
 // export const gotChannelsFromServer = channels => ({type: GOT_CHANNELS_FROM_SERVER, channels})
 
 // thunk creators
@@ -40,8 +41,10 @@ const reducer = (state=initialState, action) => {
   switch(action.type) {
     case GOT_MESSAGES_FROM_SERVER:
       return {...state, messages: action.messages }
-    case GOT_CHANNELS_FROM_SERVER:
-      return {...state, channels: action.channels }
+    case WRITING_MESSAGE:
+      return {...state, userInput: action.input}
+    case RECEIVED_NEW_MESSAGE:
+      return {...state, messages: [...state.messages,action.message]}
     default:
       return state
   }
